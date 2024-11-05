@@ -1,0 +1,29 @@
+<<<<<<< HEAD
+version: '3.1'
+=======
+version: '3.4'
+>>>>>>> 10b9ee6c6279853555f80228521c7ad1b2750d3b
+services:
+  mariadb:
+    image: mysql:8.0 # mariadb:11.5.2
+    ports:
+      - "13306:3306"
+    command:
+<<<<<<< HEAD
+      --init-file /data/application/db.sql
+=======
+      --init-file /data/application/java-sql.sql
+>>>>>>> 10b9ee6c6279853555f80228521c7ad1b2750d3b
+    environment:
+      MYSQL_ROOT_USER: javafxTest
+      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_DATABASE: javafxTest
+      MYSQL_USER: javafxTest
+      MYSQL_PASSWORD: changeme
+    volumes:
+      - ${PWD}/mariadb:/var/lib/mysql
+<<<<<<< HEAD
+      - ./db.sql:/data/application/db.sql
+=======
+      - ./java-sql.sql:/data/application/java-sql.sql
+>>>>>>> 10b9ee6c6279853555f80228521c7ad1b2750d3b
