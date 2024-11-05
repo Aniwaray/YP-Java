@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `coursework`.`product` (
   `productPrice` INT NULL DEFAULT NULL,
   `productQuantityInStock` INT NULL DEFAULT NULL,
   `productStatus` VARCHAR(45) NULL DEFAULT NULL,
-  `productPhoto` VARCHAR(45) NULL DEFAULT NULL,
+  `productPhoto` VARCHAR(300) NULL DEFAULT NULL,
   `category_id_category` INT NOT NULL,
   `manufacture_id_manufacture` INT NOT NULL,
   `model_cars_id_model` INT NOT NULL,
@@ -93,7 +93,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `coursework`.`additional_photos` (
   `id_photos` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `name` VARCHAR(300) NULL DEFAULT NULL,
   `product_id_product` INT NOT NULL,
   PRIMARY KEY (`id_photos`),
   INDEX `fk_additionalphotos_product1_idx` (`product_id_product` ASC) VISIBLE,
@@ -136,59 +136,6 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `coursework`.`orders`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `coursework`.`orders` (
-  `id_orders` INT NOT NULL AUTO_INCREMENT,
-  `date` DATE NULL DEFAULT NULL,
-  `count_product` INT NULL DEFAULT NULL,
-  `final_price` INT NULL DEFAULT NULL,
-  `point_id_point` INT NOT NULL,
-  `product_id_product` INT NOT NULL,
-  `clients_id_clients` INT NOT NULL,
-  PRIMARY KEY (`id_orders`),
-  INDEX `fk_users_has_product_product1_idx` (`product_id_product` ASC) VISIBLE,
-  INDEX `fk_orders_point1_idx` (`point_id_point` ASC) VISIBLE,
-  INDEX `fk_orders_clients1_idx` (`clients_id_clients` ASC) VISIBLE,
-  CONSTRAINT `fk_orders_clients1`
-    FOREIGN KEY (`clients_id_clients`)
-    REFERENCES `coursework`.`clients` (`id_clients`),
-  CONSTRAINT `fk_orders_point1`
-    FOREIGN KEY (`point_id_point`)
-    REFERENCES `coursework`.`point` (`id_point`),
-  CONSTRAINT `fk_users_has_product_product1`
-    FOREIGN KEY (`product_id_product`)
-    REFERENCES `coursework`.`product` (`id_product`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 54
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `coursework`.`reviews`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `coursework`.`reviews` (
-  `id_reviews` INT NOT NULL,
-  `rating` INT NULL DEFAULT NULL,
-  `comment` VARCHAR(45) NULL DEFAULT NULL,
-  `clients_id_clients` INT NOT NULL,
-  `product_id_product` INT NOT NULL,
-  PRIMARY KEY (`id_reviews`),
-  INDEX `fk_clients_has_product_product2_idx` (`product_id_product` ASC) VISIBLE,
-  INDEX `fk_clients_has_product_clients2_idx` (`clients_id_clients` ASC) VISIBLE,
-  CONSTRAINT `fk_clients_has_product_clients2`
-    FOREIGN KEY (`clients_id_clients`)
-    REFERENCES `coursework`.`clients` (`id_clients`),
-  CONSTRAINT `fk_clients_has_product_product2`
-    FOREIGN KEY (`product_id_product`)
-    REFERENCES `coursework`.`product` (`id_product`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
 -- Table `coursework`.`role`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `coursework`.`role` (
@@ -218,6 +165,64 @@ CREATE TABLE IF NOT EXISTS `coursework`.`staff` (
     REFERENCES `coursework`.`role` (`id_role`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `coursework`.`orders`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `coursework`.`orders` (
+  `id_orders` INT NOT NULL AUTO_INCREMENT,
+  `date` DATE NULL DEFAULT NULL,
+  `count_product` INT NULL DEFAULT NULL,
+  `final_price` INT NULL DEFAULT NULL,
+  `point_id_point` INT NOT NULL,
+  `product_id_product` INT NOT NULL,
+  `clients_id_clients` INT NOT NULL,
+  `staff_id_staff` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id_orders`),
+  INDEX `fk_users_has_product_product1_idx` (`product_id_product` ASC) VISIBLE,
+  INDEX `fk_orders_point1_idx` (`point_id_point` ASC) VISIBLE,
+  INDEX `fk_orders_clients1_idx` (`clients_id_clients` ASC) VISIBLE,
+  INDEX `fk_staff1_idx` (`staff_id_staff` ASC) VISIBLE,
+  CONSTRAINT `fk_orders_clients1`
+    FOREIGN KEY (`clients_id_clients`)
+    REFERENCES `coursework`.`clients` (`id_clients`),
+  CONSTRAINT `fk_orders_point1`
+    FOREIGN KEY (`point_id_point`)
+    REFERENCES `coursework`.`point` (`id_point`),
+  CONSTRAINT `fk_staff1`
+    FOREIGN KEY (`staff_id_staff`)
+    REFERENCES `coursework`.`staff` (`id_staff`),
+  CONSTRAINT `fk_users_has_product_product1`
+    FOREIGN KEY (`product_id_product`)
+    REFERENCES `coursework`.`product` (`id_product`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 54
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `coursework`.`reviews`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `coursework`.`reviews` (
+  `id_reviews` INT NOT NULL,
+  `rating` INT NULL DEFAULT NULL,
+  `comment` VARCHAR(45) NULL DEFAULT NULL,
+  `clients_id_clients` INT NOT NULL,
+  `product_id_product` INT NOT NULL,
+  PRIMARY KEY (`id_reviews`),
+  INDEX `fk_clients_has_product_product2_idx` (`product_id_product` ASC) VISIBLE,
+  INDEX `fk_clients_has_product_clients2_idx` (`clients_id_clients` ASC) VISIBLE,
+  CONSTRAINT `fk_clients_has_product_clients2`
+    FOREIGN KEY (`clients_id_clients`)
+    REFERENCES `coursework`.`clients` (`id_clients`),
+  CONSTRAINT `fk_clients_has_product_product2`
+    FOREIGN KEY (`product_id_product`)
+    REFERENCES `coursework`.`product` (`id_product`))
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
