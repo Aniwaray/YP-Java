@@ -6,10 +6,10 @@ import java.util.ArrayList;
 public class Database {
 
     private final String host = "127.0.0.1";
-    private final String port = "3306";
+    private final String port = "13306";
     private final String dbName = "coursework";
     private final String login = "root";
-    private final String password = "vanessa2020k";
+    private final String password = "changeme";
 
     private static int max, id;
 

@@ -9,9 +9,9 @@ services:
     environment:
       MYSQL_ROOT_USER: javafxTest
       MYSQL_ROOT_PASSWORD: changeme
-      MYSQL_DATABASE: javafxTest
+      MYSQL_DATABASE: coursework
       MYSQL_USER: javafxTest
       MYSQL_PASSWORD: changeme
     volumes:
-      - ${PWD}/mariadb:/var/lib/mysql
-      - ./db.sql:/data/application/db.sql
+      - C:\Users\Anna\IdeaProjects\coursework\database/mariadb:/var/lib/mysql
+      - C:\Users\Anna\IdeaProjects\coursework\database\db.sql:/data/application/db.sql
